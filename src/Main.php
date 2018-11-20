@@ -4,8 +4,8 @@ namespace App;
 
 class Main
 {
-    public function foo()
+    public function foo(Foo $foo)
     {
-        return 'bar';
+        return $foo->foo();
     }
 }

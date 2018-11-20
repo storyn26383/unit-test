@@ -3,7 +3,7 @@
 namespace Tests;
 
 use App\Main;
-use PHPUnit\Framework\TestCase;
+use Mockery as m;
 
 class UnitTest extends TestCase
 {
@@ -11,6 +11,11 @@ class UnitTest extends TestCase
     {
         $main = new Main;
 
-        $this->assertEquals('bar', $main->foo());
+        $foo = m::mock(\App\Foo::class);
+        $foo->shouldReceive('foo')
+            ->once()
+            ->andReturn('bar');
+
+        $this->assertEquals('bar', $main->foo($foo));
     }
 }
