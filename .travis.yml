@@ -1,8 +1,9 @@
 language: php
 
 php:
-  - '7.1'
-  - '7.2'
+  - '8.0'
+  - '8.1'
+  - '8.2'
 
 before_script:
   - travis_retry composer self-update
@@ -12,8 +13,8 @@ install:
 
 script:
   - mkdir -p build/logs
+  - vendor/bin/pint src tests --test
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
-  - vendor/bin/phpcs --version && echo && vendor/bin/phpcs -p --standard=PSR2 src tests
 
 after_success:
   - vendor/bin/coveralls -v
